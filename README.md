@@ -12,14 +12,16 @@ Windows Maps app should be placed on a second monitor though it will also work w
 SimConnect needs to be configured to connect from another PC. Depending on which version you have you'll need to go to a different location:
 
 MS Store / XBox GamePass Version:
+ ``` 
 %LOCALAPPDATA%\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache
-
+ ``` 
 Steam Version:
+ ``` 
 %APPDATA%\Microsoft Flight Simulator
+ ``` 
 
-
-Open the SimConnect.xml file and add the following right after <Filename>SimConnect.xml</Filename> :
-
+Open the SimConnect.xml file and add the following right after `<Filename>SimConnect.xml</Filename>` :
+```xml
 <SimConnect.Comm>
     <Disabled>False</Disabled>
     <Protocol>IPv4</Protocol>
@@ -30,9 +32,11 @@ Open the SimConnect.xml file and add the following right after <Filename>SimConn
     <MaxRecvSize>4096</MaxRecvSize>
     <DisableNagle>False</DisableNagle>
   </SimConnect.Comm>
+```
   
   Replace the YOUR_IP_ADDRESS_HERE with the IP of your PC on which FS will be executed. Also choose a PORT. Should look like this afterwards
-  
+
+```xml
 .....
     <Descr>SimConnect Server Configuration</Descr>
     <Filename>SimConnect.xml</Filename>
@@ -56,23 +60,26 @@ Open the SimConnect.xml file and add the following right after <Filename>SimConn
     </SimConnect.Comm>
     <SimConnect.Comm>
   ..........
-  
+ ``` 
   
   On the PC that will run FSBingMapsConnect open the folder containing the program and edit the SimConnect.cfg replace
-  
+
+ ``` 
 ; new FS pipe
 [SimConnect]
 Protocol=Pipe
 Port=Custom/SimConnect
 Address=127.0.0.1
+ ``` 
 
 with
+``` 
 ; new FS pipe
 [SimConnect]
 Protocol=IPv4
 Port=YOUR_PORT_HERE
 Address=YOUR_IP_ADDRESS_HERE
-
+``` 
 
 Use the same IP Address and Port as on the SimConnect.xml above.
   
