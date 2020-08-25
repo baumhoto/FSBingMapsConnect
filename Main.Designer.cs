@@ -42,6 +42,7 @@
             this.chkShowValues = new System.Windows.Forms.CheckBox();
             this.cbMap = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.chkKeepFocus = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -202,7 +203,7 @@
             this.cbMap.Items.AddRange(new object[] {
             "Aerial",
             "Road"});
-            this.cbMap.Location = new System.Drawing.Point(133, 253);
+            this.cbMap.Location = new System.Drawing.Point(131, 240);
             this.cbMap.Name = "cbMap";
             this.cbMap.Size = new System.Drawing.Size(75, 21);
             this.cbMap.TabIndex = 12;
@@ -210,17 +211,30 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 256);
+            this.label3.Location = new System.Drawing.Point(15, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 13;
             this.label3.Text = "Map Type";
+            // 
+            // chkKeepFocus
+            // 
+            this.chkKeepFocus.AutoSize = true;
+            this.chkKeepFocus.Checked = true;
+            this.chkKeepFocus.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkKeepFocus.Location = new System.Drawing.Point(18, 268);
+            this.chkKeepFocus.Name = "chkKeepFocus";
+            this.chkKeepFocus.Size = new System.Drawing.Size(153, 17);
+            this.chkKeepFocus.TabIndex = 14;
+            this.chkKeepFocus.Text = "Keep FS Window Focused";
+            this.chkKeepFocus.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(224, 450);
+            this.Controls.Add(this.chkKeepFocus);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbMap);
             this.Controls.Add(this.chkShowValues);
@@ -258,6 +272,7 @@
         private System.Windows.Forms.CheckBox chkShowValues;
         private System.Windows.Forms.ComboBox cbMap;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chkKeepFocus;
     }
 }
 

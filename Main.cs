@@ -199,7 +199,10 @@ namespace SimMapsConnect
                         //var gpsString = $"bingmaps:?rtp=pos.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~pos.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&lvl={cbZoom.SelectedItem}&sty=a";
                         Process.Start(gpsString);
 
-                        Process.Start("ActivateFS.exe");
+                        if(chkKeepFocus.Checked)
+                        {
+                            Process.Start("ActivateFS.exe");
+                        }
 
                     }
 
