@@ -5,4 +5,83 @@ Microsoft Flight Simulator Ingame VFR Map only has limited infos. This applicati
 
 Updates can be triggered manually or automatically (update interval can be specified).
 
-Windows Maps app should be placed on a second monitor though it will also work with only one (disable Keep FS Window Focused) to keep the Maps app in Front. Using a seperate computer still needs to be tested.
+Windows Maps app should be placed on a second monitor though it will also work with only one (disable Keep FS Window Focused) to keep the Maps app in Front. It also works using another PC (see description below)
+
+
+## Using another PC to connect to FS
+SimConnect needs to be configured to connect from another PC. Depending on which version you have you'll need to go to a different location:
+
+MS Store / XBox GamePass Version:
+%LOCALAPPDATA%\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache
+
+Steam Version:
+%APPDATA%\Microsoft Flight Simulator
+
+
+Open the SimConnect.xml file and add the following right after <Filename>SimConnect.xml</Filename> :
+
+<SimConnect.Comm>
+    <Disabled>False</Disabled>
+    <Protocol>IPv4</Protocol>
+    <Scope>global</Scope>
+    <Address>YOUR_IP_ADDRESS_HERE</Address>
+    <MaxClients>64</MaxClients>
+    <Port>YOUR_PORT_HERE</Port>
+    <MaxRecvSize>4096</MaxRecvSize>
+    <DisableNagle>False</DisableNagle>
+  </SimConnect.Comm>
+  
+  Replace the YOUR_IP_ADDRESS_HERE with the IP of your PC on which FS will be executed. Also choose a PORT. Should look like this afterwards
+  
+.....
+    <Descr>SimConnect Server Configuration</Descr>
+    <Filename>SimConnect.xml</Filename>
+ <SimConnect.Comm>
+    <Disabled>False</Disabled>
+    <Protocol>IPv4</Protocol>
+    <Scope>global</Scope>
+    <Address>192.168.1.32</Address>
+    <MaxClients>64</MaxClients>
+    <Port>4201</Port>
+    <MaxRecvSize>4096</MaxRecvSize>
+    <DisableNagle>False</DisableNagle>
+  </SimConnect.Comm>
+    <SimConnect.Comm>
+        <Descr>Static IP4 port</Descr>
+        <Protocol>IPv4</Protocol>
+        <Scope>local</Scope>
+        <Port>500</Port>
+        <MaxClients>64</MaxClients>
+        <MaxRecvSize>41088</MaxRecvSize>
+    </SimConnect.Comm>
+    <SimConnect.Comm>
+  ..........
+  
+  
+  On the PC that will run FSBingMapsConnect open the folder containing the program and edit the SimConnect.cfg replace
+  
+; new FS pipe
+[SimConnect]
+Protocol=Pipe
+Port=Custom/SimConnect
+Address=127.0.0.1
+
+with
+; new FS pipe
+[SimConnect]
+Protocol=IPv4
+Port=YOUR_PORT_HERE
+Address=YOUR_IP_ADDRESS_HERE
+
+
+Use the same IP Address and Port as on the SimConnect.xml above.
+  
+ 
+Now FSBingMaps should be able connect to FS running on the remote PC.
+  
+  
+  
+  
+  
+
+
