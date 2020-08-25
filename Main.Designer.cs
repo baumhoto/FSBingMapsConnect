@@ -43,6 +43,9 @@
             this.cbMap = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chkKeepFocus = new System.Windows.Forms.CheckBox();
+            this.nudPitch = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPitch)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -78,7 +81,7 @@
             // 
             // richResponse
             // 
-            this.richResponse.Location = new System.Drawing.Point(15, 314);
+            this.richResponse.Location = new System.Drawing.Point(13, 429);
             this.richResponse.Name = "richResponse";
             this.richResponse.Size = new System.Drawing.Size(193, 114);
             this.richResponse.TabIndex = 3;
@@ -89,8 +92,7 @@
             this.chkUpdateMaps.AutoSize = true;
             this.chkUpdateMaps.Checked = true;
             this.chkUpdateMaps.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUpdateMaps.Enabled = false;
-            this.chkUpdateMaps.Location = new System.Drawing.Point(15, 168);
+            this.chkUpdateMaps.Location = new System.Drawing.Point(12, 168);
             this.chkUpdateMaps.Name = "chkUpdateMaps";
             this.chkUpdateMaps.Size = new System.Drawing.Size(179, 17);
             this.chkUpdateMaps.TabIndex = 4;
@@ -121,7 +123,7 @@
             // 
             this.chkRequestData.AutoSize = true;
             this.chkRequestData.Enabled = false;
-            this.chkRequestData.Location = new System.Drawing.Point(15, 120);
+            this.chkRequestData.Location = new System.Drawing.Point(13, 118);
             this.chkRequestData.Name = "chkRequestData";
             this.chkRequestData.Size = new System.Drawing.Size(156, 17);
             this.chkRequestData.TabIndex = 6;
@@ -132,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 144);
+            this.label1.Location = new System.Drawing.Point(10, 144);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 13);
             this.label1.TabIndex = 7;
@@ -170,7 +172,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 194);
+            this.label2.Location = new System.Drawing.Point(9, 194);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 9;
@@ -179,7 +181,7 @@
             // chkZoom
             // 
             this.chkZoom.AutoSize = true;
-            this.chkZoom.Location = new System.Drawing.Point(18, 218);
+            this.chkZoom.Location = new System.Drawing.Point(13, 218);
             this.chkZoom.Name = "chkZoom";
             this.chkZoom.Size = new System.Drawing.Size(158, 17);
             this.chkZoom.TabIndex = 10;
@@ -190,7 +192,7 @@
             // chkShowValues
             // 
             this.chkShowValues.AutoSize = true;
-            this.chkShowValues.Location = new System.Drawing.Point(18, 291);
+            this.chkShowValues.Location = new System.Drawing.Point(12, 397);
             this.chkShowValues.Name = "chkShowValues";
             this.chkShowValues.Size = new System.Drawing.Size(88, 17);
             this.chkShowValues.TabIndex = 11;
@@ -211,7 +213,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 243);
+            this.label3.Location = new System.Drawing.Point(9, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 13;
@@ -222,18 +224,41 @@
             this.chkKeepFocus.AutoSize = true;
             this.chkKeepFocus.Checked = true;
             this.chkKeepFocus.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkKeepFocus.Location = new System.Drawing.Point(18, 268);
+            this.chkKeepFocus.Location = new System.Drawing.Point(12, 358);
             this.chkKeepFocus.Name = "chkKeepFocus";
             this.chkKeepFocus.Size = new System.Drawing.Size(153, 17);
             this.chkKeepFocus.TabIndex = 14;
             this.chkKeepFocus.Text = "Keep FS Window Focused";
             this.chkKeepFocus.UseVisualStyleBackColor = true;
             // 
+            // nudPitch
+            // 
+            this.nudPitch.Location = new System.Drawing.Point(58, 280);
+            this.nudPitch.Maximum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.nudPitch.Name = "nudPitch";
+            this.nudPitch.Size = new System.Drawing.Size(75, 20);
+            this.nudPitch.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 264);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(183, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Map Pitch (0 = Top / 90 = Horizontal)";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 450);
+            this.ClientSize = new System.Drawing.Size(224, 564);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.nudPitch);
             this.Controls.Add(this.chkKeepFocus);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbMap);
@@ -251,6 +276,7 @@
             this.Controls.Add(this.buttonConnect);
             this.Name = "Main";
             this.Text = "FS Maps Connect";
+            ((System.ComponentModel.ISupportInitialize)(this.nudPitch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,6 +299,8 @@
         private System.Windows.Forms.ComboBox cbMap;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chkKeepFocus;
+        private System.Windows.Forms.NumericUpDown nudPitch;
+        private System.Windows.Forms.Label label4;
     }
 }
 

@@ -48,7 +48,6 @@ namespace SimMapsConnect
             public String title;
             public double latitude;
             public double longitude;
-            public double altitude;
             public double altitudeAboveGround;
             public double heading;
         };
@@ -61,7 +60,7 @@ namespace SimMapsConnect
             cbZoom.SelectedIndex = 14;
             cbMap.SelectedIndex = 0;
 
-            setButtons(true, false, false, false, false);
+            setButtons(true, false, false, false);
             myTimer.Tick += TimerEventProcessor;
         }
         // Simconnect client will send a win32 message when there is
@@ -83,13 +82,12 @@ namespace SimMapsConnect
             }
         }
 
-        private void setButtons(bool bConnect, bool bGet, bool bDisconnect, bool bRequest, bool bUpdate)
+        private void setButtons(bool bConnect, bool bGet, bool bDisconnect, bool bRequest)
         {
             buttonConnect.Enabled = bConnect;
             buttonRequestData.Enabled = bGet;
             buttonDisconnect.Enabled = bDisconnect;
             chkRequestData.Enabled = bRequest;
-            chkUpdateMaps.Enabled = bUpdate;
         }
 
         private void closeConnection()
@@ -194,7 +192,7 @@ namespace SimMapsConnect
                             default: mapString += "a"; break;
                         }
 
-                        var gpsString = $"bingmaps:?cp={s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&{zoomString}&{mapString}&hdg={(int)s1.heading}";
+                        var gpsString = $"bingmaps:?cp={s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&{zoomString}&{mapString}&hdg={(int)s1.heading}&pit={nudPitch.Value}";
                         //var gpsString = $"bingmaps:?cp={s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&lvl={cbZoom.SelectedItem}&sty=h&sp=point.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{System.Net.WebUtility.UrlEncode("Tobi")}";
                         //var gpsString = $"bingmaps:?rtp=pos.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~pos.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&lvl={cbZoom.SelectedItem}&sty=a";
                         Process.Start(gpsString);
@@ -222,14 +220,14 @@ namespace SimMapsConnect
                 {
                     // the constructor is similar to SimConnect_Open in the native API
                     simconnect = new SimConnect("Managed Data Request", this.Handle, WM_USER_SIMCONNECT, null, 0);
-                    setButtons(false, true, true, true, true);
+                    setButtons(false, true, true, true);
 
                     initDataRequest();
 
                 }
                 catch (COMException ex)
                 {
-                    displayText("Unable to connect to FSX");
+                    displayText("Unable to connect to FS " + ex.Message);
                 }
             }
             else
@@ -237,7 +235,7 @@ namespace SimMapsConnect
                 displayText("Error - try again");
                 closeConnection();
 
-                setButtons(true, false, false, false, false);
+                setButtons(true, false, false, false);
             }
         }
 
@@ -246,7 +244,7 @@ namespace SimMapsConnect
             myTimer.Stop();
             myTimer.Enabled = false;
             closeConnection();
-            setButtons(true, false, false, false, false);
+            setButtons(true, false, false, false);
         }
 
         private void buttonRequestData_Click(object sender, EventArgs e)
@@ -258,8 +256,6 @@ namespace SimMapsConnect
 
         }
 
-        // Response number
-        int response = 1;
 
         // Output text - display a maximum of 10 lines
         StringBuilder output = new StringBuilder();
