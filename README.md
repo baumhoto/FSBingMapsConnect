@@ -9,7 +9,7 @@ Windows Maps app should be placed on a second monitor though it will also work w
 
 ## Google Earth Pro support
 
-Version 0.4.0 now support Google Earth Pro (get it from here: https://www.google.com/earth/download/gep/agree.html). Google Earth Pro allows to set a pin marker to the current location. 
+Version 0.4.0 now support Google Earth Pro (get it from here: https://www.google.com/earth/download/gep/agree.html). Google Earth Pro shows a pin marker at the current location. 
 
 Functionality provided by writing an kml (https://developers.google.com/kml/documentation/kmlreference?csw=1#top_of_page) file which is constantly updated, thus **there will be an dialog in Google Earth Pro asking about loading an modified file. Please choose "always" when this occurs.**
 
