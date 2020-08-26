@@ -46,6 +46,7 @@
             this.nudPitch = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.chkpreventSleep = new System.Windows.Forms.CheckBox();
+            this.cbMapService = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudPitch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,7 +94,7 @@
             this.chkUpdateMaps.AutoSize = true;
             this.chkUpdateMaps.Checked = true;
             this.chkUpdateMaps.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUpdateMaps.Location = new System.Drawing.Point(12, 168);
+            this.chkUpdateMaps.Location = new System.Drawing.Point(12, 190);
             this.chkUpdateMaps.Name = "chkUpdateMaps";
             this.chkUpdateMaps.Size = new System.Drawing.Size(179, 17);
             this.chkUpdateMaps.TabIndex = 4;
@@ -115,7 +116,7 @@
             "60",
             "90",
             "180"});
-            this.cbRequestInterval.Location = new System.Drawing.Point(133, 141);
+            this.cbRequestInterval.Location = new System.Drawing.Point(133, 163);
             this.cbRequestInterval.Name = "cbRequestInterval";
             this.cbRequestInterval.Size = new System.Drawing.Size(73, 21);
             this.cbRequestInterval.TabIndex = 5;
@@ -124,7 +125,7 @@
             // 
             this.chkRequestData.AutoSize = true;
             this.chkRequestData.Enabled = false;
-            this.chkRequestData.Location = new System.Drawing.Point(13, 118);
+            this.chkRequestData.Location = new System.Drawing.Point(13, 140);
             this.chkRequestData.Name = "chkRequestData";
             this.chkRequestData.Size = new System.Drawing.Size(156, 17);
             this.chkRequestData.TabIndex = 6;
@@ -135,7 +136,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 144);
+            this.label1.Location = new System.Drawing.Point(10, 166);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 13);
             this.label1.TabIndex = 7;
@@ -165,7 +166,7 @@
             "18",
             "19",
             "20"});
-            this.cbZoom.Location = new System.Drawing.Point(133, 191);
+            this.cbZoom.Location = new System.Drawing.Point(133, 213);
             this.cbZoom.Name = "cbZoom";
             this.cbZoom.Size = new System.Drawing.Size(73, 21);
             this.cbZoom.TabIndex = 8;
@@ -173,7 +174,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 194);
+            this.label2.Location = new System.Drawing.Point(9, 216);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 9;
@@ -182,7 +183,7 @@
             // chkZoom
             // 
             this.chkZoom.AutoSize = true;
-            this.chkZoom.Location = new System.Drawing.Point(13, 218);
+            this.chkZoom.Location = new System.Drawing.Point(13, 240);
             this.chkZoom.Name = "chkZoom";
             this.chkZoom.Size = new System.Drawing.Size(158, 17);
             this.chkZoom.TabIndex = 10;
@@ -206,7 +207,7 @@
             this.cbMap.Items.AddRange(new object[] {
             "Aerial",
             "Road"});
-            this.cbMap.Location = new System.Drawing.Point(131, 240);
+            this.cbMap.Location = new System.Drawing.Point(131, 262);
             this.cbMap.Name = "cbMap";
             this.cbMap.Size = new System.Drawing.Size(75, 21);
             this.cbMap.TabIndex = 12;
@@ -214,7 +215,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 243);
+            this.label3.Location = new System.Drawing.Point(9, 265);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 13;
@@ -223,8 +224,6 @@
             // chkKeepFocus
             // 
             this.chkKeepFocus.AutoSize = true;
-            this.chkKeepFocus.Checked = true;
-            this.chkKeepFocus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkKeepFocus.Location = new System.Drawing.Point(12, 358);
             this.chkKeepFocus.Name = "chkKeepFocus";
             this.chkKeepFocus.Size = new System.Drawing.Size(153, 17);
@@ -234,7 +233,7 @@
             // 
             // nudPitch
             // 
-            this.nudPitch.Location = new System.Drawing.Point(58, 280);
+            this.nudPitch.Location = new System.Drawing.Point(58, 302);
             this.nudPitch.Maximum = new decimal(new int[] {
             90,
             0,
@@ -247,7 +246,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 264);
+            this.label4.Location = new System.Drawing.Point(10, 286);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(183, 13);
             this.label4.TabIndex = 16;
@@ -264,11 +263,24 @@
             this.chkpreventSleep.UseVisualStyleBackColor = true;
             this.chkpreventSleep.CheckedChanged += new System.EventHandler(this.chkpreventSleep_CheckedChanged);
             // 
+            // cbMapService
+            // 
+            this.cbMapService.FormattingEnabled = true;
+            this.cbMapService.Items.AddRange(new object[] {
+            "Windows Maps",
+            "Google Earth Pro"});
+            this.cbMapService.Location = new System.Drawing.Point(13, 109);
+            this.cbMapService.Name = "cbMapService";
+            this.cbMapService.Size = new System.Drawing.Size(193, 21);
+            this.cbMapService.TabIndex = 18;
+            this.cbMapService.SelectedIndexChanged += new System.EventHandler(this.cbMapService_SelectedIndexChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(224, 564);
+            this.Controls.Add(this.cbMapService);
             this.Controls.Add(this.chkpreventSleep);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nudPitch);
@@ -315,6 +327,7 @@
         private System.Windows.Forms.NumericUpDown nudPitch;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkpreventSleep;
+        private System.Windows.Forms.ComboBox cbMapService;
     }
 }
 

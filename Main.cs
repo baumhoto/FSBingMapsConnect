@@ -1,4 +1,5 @@
-﻿using Microsoft.FlightSimulator.SimConnect;
+﻿using FSBingMapsConnect;
+using Microsoft.FlightSimulator.SimConnect;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,7 +57,7 @@ namespace SimMapsConnect
         // this is how you declare a data structure so that
         // simconnect knows how to fill it/read it.
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
-        struct Struct1
+        public struct FsSimResponse
         {
             // this is how you declare a fixed size string
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
@@ -74,6 +75,7 @@ namespace SimMapsConnect
             cbRequestInterval.SelectedIndex = 3;
             cbZoom.SelectedIndex = 14;
             cbMap.SelectedIndex = 0;
+            cbMapService.SelectedIndex = 0;
 
             setButtons(true, false, false, false);
             requestDataTimer.Tick += requestDataEvent;
@@ -139,7 +141,7 @@ namespace SimMapsConnect
 
                 // IMPORTANT: register it with the simconnect managed wrapper marshaller
                 // if you skip this step, you will only receive a uint in the .dwData field.
-                simconnect.RegisterDataDefineStruct<Struct1>(DEFINITIONS.Struct1);
+                simconnect.RegisterDataDefineStruct<FsSimResponse>(DEFINITIONS.Struct1);
 
                 // catch a simobject data request
                 simconnect.OnRecvSimobjectDataBytype += new SimConnect.RecvSimobjectDataBytypeEventHandler(simconnect_OnRecvSimobjectDataBytype);
@@ -179,7 +181,7 @@ namespace SimMapsConnect
             switch ((DATA_REQUESTS)data.dwRequestID)
             {
                 case DATA_REQUESTS.REQUEST_1:
-                    Struct1 s1 = (Struct1)data.dwData[0];
+                    FsSimResponse s1 = (FsSimResponse)data.dwData[0];
 
                     if (chkShowValues.Checked)
                     {
@@ -190,28 +192,22 @@ namespace SimMapsConnect
                     }
                     if(chkUpdateMaps.Checked)
                     {
-                        string zoomString = "";
-                        if(chkZoom.Checked)
+
+                        var connectorParameters = new ConnectorParameters();
+                        connectorParameters.Response = s1;
+                        connectorParameters.AlignZoom = chkZoom.Checked;
+                        connectorParameters.ZoomLevel = int.Parse(cbZoom.SelectedItem.ToString());
+                        connectorParameters.MapType = cbMap.SelectedItem.ToString();
+                        connectorParameters.Pitch = (int)nudPitch.Value;
+
+                        if(cbMapService.SelectedItem.ToString() == "Windows Maps")
                         {
-                            zoomString = $"lvl={20 - Math.Ceiling(s1.altitudeAboveGround / 1000)}";
+                            Process.Start(BingMapsConnector.GetExecutionString(connectorParameters));
                         }
                         else
                         {
-                            zoomString = $"lvl={cbZoom.SelectedItem}";
+                            Process.Start(GoogleEarthConnector.GetExecutionString(connectorParameters));
                         }
-
-                        string mapString = "sty=";
-                        switch(cbMap.SelectedItem)
-                        {
-                            case "Road": mapString += "r";break;
-                            //case "3D": mapString += "3d";break;
-                            default: mapString += "a"; break;
-                        }
-
-                        var gpsString = $"bingmaps:?cp={s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&{zoomString}&{mapString}&hdg={(int)s1.heading}&pit={nudPitch.Value}";
-                        //var gpsString = $"bingmaps:?cp={s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&lvl={cbZoom.SelectedItem}&sty=h&sp=point.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{System.Net.WebUtility.UrlEncode("Tobi")}";
-                        //var gpsString = $"bingmaps:?rtp=pos.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~pos.{s1.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}_{s1.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&lvl={cbZoom.SelectedItem}&sty=a";
-                        Process.Start(gpsString);
 
                         if(chkKeepFocus.Checked)
                         {
@@ -343,6 +339,19 @@ namespace SimMapsConnect
             {
                 preventSleepTimer.Stop();
                 preventSleepTimer.Enabled = false;
+            }
+        }
+
+        private void cbMapService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbMapService.SelectedItem.ToString() == "Windows Maps")
+            {
+                cbMap.Enabled = true;
+            }
+            else
+            {
+                cbMap.SelectedIndex = 0;
+                cbMap.Enabled = false;
             }
         }
     }
