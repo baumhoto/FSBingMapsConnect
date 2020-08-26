@@ -18,7 +18,22 @@ namespace SimMapsConnect
     public partial class Main : Form
     {
 
-        System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        Timer requestDataTimer = new System.Windows.Forms.Timer();
+        Timer preventSleepTimer = new System.Windows.Forms.Timer();
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
+
+        [FlagsAttribute]
+        public enum EXECUTION_STATE : uint
+        {
+            ES_AWAYMODE_REQUIRED = 0x00000040,
+            ES_CONTINUOUS = 0x80000000,
+            ES_DISPLAY_REQUIRED = 0x00000002,
+            ES_SYSTEM_REQUIRED = 0x00000001
+            // Legacy flag, should not be used.
+            // ES_USER_PRESENT = 0x00000004
+        }
 
         // User-defined win32 event
         const int WM_USER_SIMCONNECT = 0x0402;
@@ -61,7 +76,8 @@ namespace SimMapsConnect
             cbMap.SelectedIndex = 0;
 
             setButtons(true, false, false, false);
-            myTimer.Tick += TimerEventProcessor;
+            requestDataTimer.Tick += requestDataEvent;
+            preventSleepTimer.Tick += preventSleepEvent;
         }
         // Simconnect client will send a win32 message when there is
         // a packet to process. ReceiveMessage must be called to
@@ -201,7 +217,6 @@ namespace SimMapsConnect
                         {
                             Process.Start("ActivateFS.exe");
                         }
-
                     }
 
                     break;
@@ -223,7 +238,6 @@ namespace SimMapsConnect
                     setButtons(false, true, true, true);
 
                     initDataRequest();
-
                 }
                 catch (COMException ex)
                 {
@@ -241,8 +255,8 @@ namespace SimMapsConnect
 
         private void buttonDisconnect_Click(object sender, EventArgs e)
         {
-            myTimer.Stop();
-            myTimer.Enabled = false;
+            requestDataTimer.Stop();
+            requestDataTimer.Enabled = false;
             closeConnection();
             setButtons(true, false, false, false);
         }
@@ -272,20 +286,20 @@ namespace SimMapsConnect
             if(chkRequestData.Checked)
             {
                 buttonRequestData.Enabled = false;
-                myTimer.Interval = int.Parse(cbRequestInterval.SelectedItem.ToString()) * 1000;
-                myTimer.Enabled = true;
-                myTimer.Start();
+                requestDataTimer.Interval = int.Parse(cbRequestInterval.SelectedItem.ToString()) * 1000;
+                requestDataTimer.Enabled = true;
+                requestDataTimer.Start();
             }
             else
             {
                 buttonRequestData.Enabled = true;
-                myTimer.Stop();
-                myTimer.Enabled = false;
+                requestDataTimer.Stop();
+                requestDataTimer.Enabled = false;
             }
         }
 
         // This is the method to run when the timer is raised.
-        private void TimerEventProcessor(Object myObject,
+        private void requestDataEvent(Object myObject,
                                                 EventArgs myEventArgs)
         {
             if(!isRequesting)
@@ -294,6 +308,12 @@ namespace SimMapsConnect
                 simconnect.RequestDataOnSimObjectType(DATA_REQUESTS.REQUEST_1, DEFINITIONS.Struct1, 0, SIMCONNECT_SIMOBJECT_TYPE.USER);
                 isRequesting = false;
             }
+        }
+
+        private void preventSleepEvent(Object myObject,
+                                               EventArgs myEventArgs)
+        {
+            SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -311,24 +331,19 @@ namespace SimMapsConnect
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-
-
-        /*private List<SimVarRequest> requests = new List<SimVarRequest>();
-
-        public Form1()
+        private void chkpreventSleep_CheckedChanged(object sender, EventArgs e)
         {
-            InitializeComponent();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Init()
-        {
-            requests.Add(new SimVarRequest()
+            if(chkpreventSleep.Checked)
             {
-
-            })
-        }*/
+                preventSleepTimer.Interval = 60000;
+                preventSleepTimer.Enabled = true;
+                preventSleepTimer.Start();
+            }
+            else
+            {
+                preventSleepTimer.Stop();
+                preventSleepTimer.Enabled = false;
+            }
+        }
     }
 }

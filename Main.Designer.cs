@@ -45,6 +45,7 @@
             this.chkKeepFocus = new System.Windows.Forms.CheckBox();
             this.nudPitch = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.chkpreventSleep = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudPitch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -252,11 +253,23 @@
             this.label4.TabIndex = 16;
             this.label4.Text = "Map Pitch (0 = Top / 90 = Horizontal)";
             // 
+            // chkpreventSleep
+            // 
+            this.chkpreventSleep.AutoSize = true;
+            this.chkpreventSleep.Location = new System.Drawing.Point(12, 335);
+            this.chkpreventSleep.Name = "chkpreventSleep";
+            this.chkpreventSleep.Size = new System.Drawing.Size(105, 17);
+            this.chkpreventSleep.TabIndex = 17;
+            this.chkpreventSleep.Text = "Keep Display On";
+            this.chkpreventSleep.UseVisualStyleBackColor = true;
+            this.chkpreventSleep.CheckedChanged += new System.EventHandler(this.chkpreventSleep_CheckedChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(224, 564);
+            this.Controls.Add(this.chkpreventSleep);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nudPitch);
             this.Controls.Add(this.chkKeepFocus);
@@ -301,6 +314,7 @@
         private System.Windows.Forms.CheckBox chkKeepFocus;
         private System.Windows.Forms.NumericUpDown nudPitch;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chkpreventSleep;
     }
 }
 
