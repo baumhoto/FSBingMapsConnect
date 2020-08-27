@@ -7,6 +7,10 @@ Updates can be triggered manually or automatically (update interval can be speci
 
 Windows Maps app should be placed on a second monitor though it will also work with only one (disable Keep FS Window Focused) to keep the Maps app in Front. It also works using another PC (see description below)
 
+## Crash on Startup
+Install C++ redistributable from https://aka.ms/vs/16/release/vc_redist.x64.exe or use  winget install Microsoft.VC++2015-2019Redist-x64  .
+
+
 ## Google Earth Pro support
 
 Version 0.4.0 now support Google Earth Pro (get it from here: https://www.google.com/earth/download/gep/agree.html). Google Earth Pro shows a pin marker at the current location. 
