@@ -24,7 +24,7 @@ namespace FSBingMapsConnect
                 default: mapString += "a"; break;
             }
 
-            var gpsString = $"bingmaps:?cp={parameters.Response.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~{parameters.Response.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&{zoomString}&{mapString}&hdg={parameters.Response.heading}&pit={parameters.Pitch}";
+            var gpsString = $"bingmaps:?cp={parameters.Response.latitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}~{parameters.Response.longitude.ToString(CultureInfo.InvariantCulture.NumberFormat)}&{zoomString}&{mapString}&hdg={parameters.Response.heading.ToString(CultureInfo.InvariantCulture.NumberFormat)}&pit={parameters.Pitch}";
 
             return gpsString;
         }
