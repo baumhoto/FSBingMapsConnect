@@ -5,9 +5,12 @@ Send Flight Simulator Plane Position to Windows Bing Maps App or Google Earth Pr
 Most useful if application is running an secondary display (enable Keep FS window focused) or on another PC (enable Keep display on). See below for instruction howto configure SimConnect for this.
 
 Windows Maps:
+* Windows Maps uses Bing Maps Data thus data is naturally more aligned with World in Flight Simulator. Current Position is center of the Map as placing a pin is not possible.
+
 ![image](https://github.com/baumhoto/FSBingMapsConnect/blob/main/assets/windowsmap.jpg)
 
 Google Earth Pro:
+* Google Earth Pro allows to set a pin at the current location but only supports Aerial view.
 ![image](https://github.com/baumhoto/FSBingMapsConnect/blob/main/assets/googleearth.jpg)
 
 
@@ -30,8 +33,6 @@ Get latest version from releases page: https://github.com/baumhoto/FSBingMapsCon
 * **Disconnect** - Disconnect from FlightSimulator Session
 * **Manually Request Position** - Retrieve current positon from Flight Simulator
 * Choose **Windows Maps or Google Earth Pro**
-** Windows Maps uses Bing Maps Data thus data is naturally more aligned with FS. Current Position is center of the Map as placing a pin is not possible
-** Google Earth Pro allows to set a pin at the current location but only support Aerial view
 * **Automatic Request Position** - Automatically retrieve the position in the interval specified under Request Interval
 * **Request Interval** - how often is the position retrieved (in seconds)
 * **Send Position to Windows Maps** - should the new position be send to Windows Maps (or Google Earth Pro) - disable if you want to look around in at your current location
