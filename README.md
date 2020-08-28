@@ -4,6 +4,12 @@ Send Flight Simulator Plane Position to Windows Bing Maps App or Google Earth Pr
 
 Most useful if application is running an secondary display (enable Keep FS window focused) or on another PC (enable Keep display on). See below for instruction howto configure SimConnect for this.
 
+  * [Details](#details)
+  * [Settings](#settings)
+  * [Crash on Startup](#crash-on-startup)
+  * [Google Earth Pro support](#google-earth-pro-support)
+  * [Using another PC to connect to FS](#using-another-pc-to-connect-to-fs)
+
 Windows Maps:
 * Windows Maps uses Bing Maps Data thus data is naturally more aligned with World in Flight Simulator. Current Position is center of the Map as placing a pin is not possible.
 
@@ -55,7 +61,8 @@ Functionality provided by writing an kml (https://developers.google.com/kml/docu
 
 
 ## Using another PC to connect to FS
-SimConnect needs to be configured to connect from another PC. Depending on which version you have you'll need to go to a different location:
+
+SimConnect needs to be configured to connect from another PC (Windows 10 64 bit required). Depending on which version you have you'll need to go to a different location:
 
 MS Store / XBox GamePass Version:
  ``` 
